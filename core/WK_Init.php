@@ -22,14 +22,25 @@ final class WK_Init implements WK_Consts {
 	 *
 	 * @return void
 	 */
-	public function plugin_activate(): void {}
+	public function plugin_activate(): void {
+		// Create DB table
+		// ( new WDI_DB() )->create_main_table( WK_Consts::MAIN_TABLE_NAME );
+
+		// Register admin rights
+	}
 
     /**
 	 * Plugin deactivation & clean up processes.
 	 *
 	 * @return void
 	 */
-    public function plugin_deactivate(): void {}
+    public function plugin_deactivate(): void {
+		// Maybe Drop the main database table
+
+		// Maybe delete all plugin settings
+
+		// Remove user rights
+	}
 
 	/**
 	 * Check PHP version function hook
@@ -58,8 +69,51 @@ final class WK_Init implements WK_Consts {
 	 * @return void
 	 */
 	public function wk_after_plugin_loaded(): void {
-		// if ( is_user_logged_in() ) {
-		// 	$this->load_scripts_and_styles();
-		// }
+		if ( is_user_logged_in() ) {
+			$this->load_scripts_and_styles();
+		}
+	}
+
+	public function load_scripts_and_styles(): void {
+		//add_action( 'wp_enqueue_scripts', [ $this, 'wk_enqueue_frontend' ] );
+		//add_action( 'admin_enqueue_scripts', [ $this, 'wk_enqueue_admin' ] );
+	}
+
+	/**
+	 * Enqueue styles and scripts.
+	 *
+	 * @param   string  $hook  Hook comes from core WP load and is the name of
+	 *                         the current view.
+	 *
+	 * @return void
+	 */
+	public function wk_enqueue_admin( $hook ): void {
+		wp_enqueue_style(
+			WK_Consts::ASSET_HANDLERS['admin']['css'],
+			plugin_dir_url( __FILE__ ) . WK_Consts::WK_ASSET_PATH['admin']['css'],
+			false,
+			WK_Consts::VERSION
+		);
+
+		wp_enqueue_script(
+			WK_Consts::ASSET_HANDLERS['admin']['js'],
+			plugin_dir_url( __FILE__ ) . WK_Consts::WK_ASSET_PATH['admin']['js'],
+			[ 'jquery' ]
+		);
+	}
+
+	public function wk_enqueue_front_end( $hook ): void {
+		wp_enqueue_style(
+			WK_Consts::ASSET_HANDLERS['front']['css'],
+			plugin_dir_url( __FILE__ ) . WK_Consts::WK_ASSET_PATH['front']['css'],
+			false,
+			WK_Consts::VERSION
+		);
+
+		wp_enqueue_script(
+			WK_Consts::ASSET_HANDLERS['front']['js'],
+			plugin_dir_url( __FILE__ ) . WK_Consts::WK_ASSET_PATH['front']['js'],
+			[ 'jquery' ]
+		);
 	}
 }
