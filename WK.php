@@ -15,17 +15,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Path definitions
-if ( ! defined( 'WK_DIR' ) ) {
-	define( 'WK_DIR', plugin_dir_path( __FILE__ ) );
-}
-if ( ! defined( 'WK_DIR_CORE' ) ) {
-	define( 'WK_DIR_CORE', plugin_dir_path( __FILE__ ) . 'core/' );
-}
-if ( ! defined( 'WK_INTERFACE_DIR' ) ) {
-	define( 'WK_INTERFACE_DIR', plugin_dir_path( __FILE__ ) . 'core/interface/' );
+if ( 
+	defined( 'WK_DIR' ) || 
+	defined( 'WK_DIR_CORE' ) ||
+	defined( 'WK_DIR_INTERFACE' )
+) {
+	die;
 }
 
-if ( defined( 'WK_DIR_CORE' ) ) {
-    require_once WK_DIR_CORE . 'WK_Init.php';
-	new WK_Init();
-}
+define( 'WK_DIR', plugin_dir_path( __FILE__ ) );
+define( 'WK_DIR_CORE', plugin_dir_path( __FILE__ ) . 'core/' );
+define( 'WK_DIR_INTERFACE', plugin_dir_path( __FILE__ ) . 'core/interface/' );
+
+require_once WK_DIR_INTERFACE . 'WK_Consts.php';
+require_once WK_DIR_CORE . 'WK_Init.php';
+
+new WK_Init();
