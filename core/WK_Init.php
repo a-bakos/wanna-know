@@ -1,6 +1,7 @@
 <?php
-final class WK_Init implements WK_Consts {
-    public function __construct() {
+readonly final class WK_Init implements WK_Consts {
+
+	public function __construct() {
         $this->plugin_setup();
     }
 
@@ -24,7 +25,7 @@ final class WK_Init implements WK_Consts {
 	 */
 	public function plugin_activate(): void {
 		// Create DB table
-		// ( new WDI_DB() )->create_main_table( WK_Consts::MAIN_TABLE_NAME );
+		( new WK_DB() )->create_main_table();
 
 		// Register admin rights
 	}
@@ -75,8 +76,8 @@ final class WK_Init implements WK_Consts {
 	}
 
 	public function load_scripts_and_styles(): void {
-		//add_action( 'wp_enqueue_scripts', [ $this, 'wk_enqueue_frontend' ] );
-		//add_action( 'admin_enqueue_scripts', [ $this, 'wk_enqueue_admin' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'wk_enqueue_front_end' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'wk_enqueue_admin' ] );
 	}
 
 	/**
@@ -89,31 +90,31 @@ final class WK_Init implements WK_Consts {
 	 */
 	public function wk_enqueue_admin( $hook ): void {
 		wp_enqueue_style(
-			WK_Consts::ASSET_HANDLERS['admin']['css'],
-			plugin_dir_url( __FILE__ ) . WK_Consts::WK_ASSET_PATH['admin']['css'],
+			WK_AssetHandler::CSS_Admin->value,
+			plugin_dir_url( __FILE__ ) . WK_AssetHandler::CSS_Admin->get_path(),
 			false,
-			WK_Consts::VERSION
+			WK_VERSION
 		);
 
 		wp_enqueue_script(
-			WK_Consts::ASSET_HANDLERS['admin']['js'],
-			plugin_dir_url( __FILE__ ) . WK_Consts::WK_ASSET_PATH['admin']['js'],
-			[ 'jquery' ]
+			WK_AssetHandler::JS_Admin->value,
+			plugin_dir_url( __FILE__ ) . WK_AssetHandler::JS_Admin->get_path(),
+			[ WK_AssetHandler::JQuery->value ]
 		);
 	}
 
 	public function wk_enqueue_front_end( $hook ): void {
 		wp_enqueue_style(
-			WK_Consts::ASSET_HANDLERS['front']['css'],
-			plugin_dir_url( __FILE__ ) . WK_Consts::WK_ASSET_PATH['front']['css'],
+			WK_AssetHandler::CSS_Front->value,
+			plugin_dir_url( __FILE__ ) . WK_AssetHandler::CSS_Front->get_path(),
 			false,
-			WK_Consts::VERSION
+			WK_VERSION
 		);
 
 		wp_enqueue_script(
-			WK_Consts::ASSET_HANDLERS['front']['js'],
-			plugin_dir_url( __FILE__ ) . WK_Consts::WK_ASSET_PATH['front']['js'],
-			[ 'jquery' ]
+			WK_AssetHandler::JS_Front->value,
+			plugin_dir_url( __FILE__ ) . WK_AssetHandler::CSS_Front->get_path,
+			[ WK_AssetHandler::JQuery->value ]
 		);
 	}
 }
