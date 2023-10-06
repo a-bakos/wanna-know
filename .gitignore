@@ -1,0 +1,6 @@
+./idea/**/*
+node_modules/
+build/css/*.map
+build/scripts/*.map
+npm-debug.log
+build/
