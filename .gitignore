@@ -1,4 +1,4 @@
-./idea/**/*
+.idea/**/*
 node_modules/
 build/css/*.map
 build/scripts/*.map

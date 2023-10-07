@@ -1,14 +1,15 @@
 <?php
+
 readonly final class WK_Init implements WK_Consts {
 
 	public function __construct() {
-        $this->plugin_setup();
-    }
+		$this->plugin_setup();
+	}
 
-    /**
+	/**
 	 * Plugin setup processes.
 	 */
-    private function plugin_setup(): void {
+	private function plugin_setup(): void {
 		// Register plugin activation/deactivation hooks.
 		register_activation_hook( __FILE__, [ $this, 'plugin_activate' ] );
 		register_deactivation_hook( __FILE__, [ $this, 'plugin_deactivate' ] );
@@ -16,7 +17,7 @@ readonly final class WK_Init implements WK_Consts {
 		// Hook into actions that are needed to run the plugin.
 		add_action( 'admin_init', [ $this, 'wk_check_php' ] );
 		add_action( 'plugins_loaded', [ $this, 'wk_after_plugin_loaded' ] );
-    }
+	}
 
 	/**
 	 * Plugin activation
@@ -30,12 +31,12 @@ readonly final class WK_Init implements WK_Consts {
 		// Register admin rights
 	}
 
-    /**
+	/**
 	 * Plugin deactivation & clean up processes.
 	 *
 	 * @return void
 	 */
-    public function plugin_deactivate(): void {
+	public function plugin_deactivate(): void {
 		// Maybe Drop the main database table
 
 		// Maybe delete all plugin settings
@@ -62,7 +63,7 @@ readonly final class WK_Init implements WK_Consts {
 			}
 		}
 	}
-    
+
 	/**
 	 * Once the plugin has loaded AND the user is logged in, register the
 	 * assets on admin-side and front-end
@@ -83,12 +84,12 @@ readonly final class WK_Init implements WK_Consts {
 	/**
 	 * Enqueue styles and scripts.
 	 *
-	 * @param   string  $hook  Hook comes from core WP load and is the name of
+	 * @param string $hook     Hook comes from core WP load and is the name of
 	 *                         the current view.
 	 *
 	 * @return void
 	 */
-	public function wk_enqueue_admin( $hook ): void {
+	public function wk_enqueue_admin( string $hook ): void {
 		wp_enqueue_style(
 			WK_AssetHandler::CSS_Admin->value,
 			plugin_dir_url( __FILE__ ) . WK_AssetHandler::CSS_Admin->get_path(),
@@ -103,9 +104,10 @@ readonly final class WK_Init implements WK_Consts {
 		);
 	}
 
-	public function wk_enqueue_front_end( $hook ): void {
+	public function wk_enqueue_front_end( string $hook ): void {
 		wp_enqueue_style(
 			WK_AssetHandler::CSS_Front->value,
+
 			plugin_dir_url( __FILE__ ) . WK_AssetHandler::CSS_Front->get_path(),
 			false,
 			WK_VERSION
@@ -113,7 +115,7 @@ readonly final class WK_Init implements WK_Consts {
 
 		wp_enqueue_script(
 			WK_AssetHandler::JS_Front->value,
-			plugin_dir_url( __FILE__ ) . WK_AssetHandler::CSS_Front->get_path,
+			plugin_dir_url( __FILE__ ) . WK_AssetHandler::CSS_Front->get_path(),
 			[ WK_AssetHandler::JQuery->value ]
 		);
 	}
