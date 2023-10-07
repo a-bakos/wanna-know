@@ -39,5 +39,5 @@ enum WK_AssetPath: string {
 	case CSS_Front = 'build/css/style-theme.css';
 	case JS_Admin  = 'build/js/admin/script-admin.min.js';
 	case JS_Front  = 'build/js/theme/script-theme.min.js';
-	case FA        = '' . WK_VERSION . '';
+	//case FA        = '' . WK_VERSION . '';
 }
