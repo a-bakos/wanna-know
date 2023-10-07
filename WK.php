@@ -59,7 +59,7 @@ readonly final class WK_Init implements WK_Consts {
 	 * @return void
 	 */
 	public function plugin_activate(): void {
-		( new WK_DB() )->create_main_table();
+		( new WK_DB() )?->create_main_table();
 
 		// Register admin rights
 	}
