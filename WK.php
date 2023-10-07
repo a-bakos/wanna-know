@@ -29,7 +29,9 @@ define( 'WK_DIR_INTERFACE', plugin_dir_path( __FILE__ ) . 'core/interface/' );
 // Version definition
 $plugin_data    = get_file_data( __FILE__, [ 'Version' => 'Version' ], false );
 $plugin_version = $plugin_data['Version'] ?? '0.0.0';
+
 define( 'WK_VERSION', $plugin_version );
+define( 'WK_BASENAME', plugin_basename( __FILE__ ) );
 
 // File includes
 require_once WK_DIR_INTERFACE . 'WK_Consts.php';
@@ -71,6 +73,8 @@ readonly final class WK_Init implements WK_Consts {
 	 */
 	public function plugin_deactivate(): void {
 		// Maybe Drop the main database table
+		//if ( get_option( self::SETTING_NAME['delete_main_table'] ) ) {
+		( new WK_DB() )?->drop_table();
 
 		// Maybe delete all plugin settings
 
@@ -87,10 +91,8 @@ readonly final class WK_Init implements WK_Consts {
 	 */
 	public function wk_check_php(): void {
 		if ( version_compare( PHP_VERSION, WK_Consts::MINIMUM_PHP_VERSION, '<' ) ) {
-			$plugin = plugin_basename( __FILE__ );
-
-			if ( is_plugin_active( $plugin ) ) {
-				deactivate_plugins( $plugin );
+			if ( is_plugin_active( WK_BASENAME ) ) {
+				deactivate_plugins( WK_BASENAME );
 				// add_action( 'admin_notices', [ $this, 'wk_error_activation_notice' ] );
 				unset( $_GET['activate'] );
 			}
@@ -114,15 +116,7 @@ readonly final class WK_Init implements WK_Consts {
 		add_action( 'admin_enqueue_scripts', [ $this, 'wk_enqueue_admin' ] );
 	}
 
-	/**
-	 * Enqueue styles and scripts.
-	 *
-	 * @param string $hook     Hook comes from core WP load and is the name of
-	 *                         the current view.
-	 *
-	 * @return void
-	 */
-	public function wk_enqueue_admin( string $hook ): void {
+	public function wk_enqueue_admin(): void {
 		wp_enqueue_style(
 			WK_AssetHandler::CSS_Admin->value,
 			plugin_dir_url( __FILE__ ) . WK_AssetHandler::CSS_Admin->get_path(),
@@ -137,7 +131,7 @@ readonly final class WK_Init implements WK_Consts {
 		);
 	}
 
-	public function wk_enqueue_front_end( string $hook ): void {
+	public function wk_enqueue_front_end(): void {
 		wp_enqueue_style(
 			WK_AssetHandler::CSS_Front->value,
 

@@ -48,4 +48,33 @@ readonly final class WK_DB implements WK_Consts {
 		dbDelta( $sql );
 	}
 
+	public function drop_table(): void {
+		if ( self::table_exists( WK_Consts::MAIN_TABLE_NAME ) ) {
+			global $wpdb;
+			$table_name = $wpdb->prefix . WK_Consts::MAIN_TABLE_NAME;
+			$sql        = 'DROP TABLE IF EXISTS ' . $table_name;
+			$wpdb->query( $sql );
+		}
+	}
+
+	/**
+	 * Check if a database table exists
+	 *
+	 * @param string $table_name The table name to check.
+	 *
+	 * @return bool               True if the table exists, false otherwise.
+	 */
+	public static function table_exists( string $table_name ): bool {
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . $table_name;
+		$query      = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table_name ) );
+
+		if ( ! $wpdb->get_var( $query ) == $table_name ) {
+			return false; // Table doesn't exist.
+		} else {
+			return true; // Table does exist.
+		}
+	}
+
 }
