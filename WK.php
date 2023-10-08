@@ -36,11 +36,15 @@ define( 'WK_BASENAME', plugin_basename( __FILE__ ) );
 // File includes
 require_once WK_DIR_INTERFACE . 'WK_Consts.php';
 require_once WK_DIR_CORE . 'WK_DB.php';
+require_once WK_DIR_CORE . 'WK_Menu.php';
 
-readonly final class WK_Init implements WK_Consts {
+require_once WK_DIR_CORE . 'WK_Init.php';
+
+readonly final class WK implements WK_Consts {
 
 	public function __construct() {
 		$this->plugin_setup();
+		new WK_Init();
 	}
 
 	/**
@@ -83,9 +87,6 @@ readonly final class WK_Init implements WK_Consts {
 
 	/**
 	 * Check PHP version function hook
-	 *
-	 * Hooks into the init, checks the PHP version - if lower than required, it
-	 * disables the plugin and adds a warning notice to the admin area.
 	 *
 	 * @return void
 	 */
@@ -149,4 +150,4 @@ readonly final class WK_Init implements WK_Consts {
 }
 
 // Plugin init
-new WK_Init();
+new WK();
