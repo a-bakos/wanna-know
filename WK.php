@@ -25,6 +25,7 @@ if (
 define( 'WK_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WK_DIR_CORE', plugin_dir_path( __FILE__ ) . 'core/' );
 define( 'WK_DIR_INTERFACE', plugin_dir_path( __FILE__ ) . 'core/interface/' );
+define( 'WK_DIR_ENUM', plugin_dir_path( __FILE__ ) . 'core/enum/' );
 
 // Version definition
 $plugin_data    = get_file_data( __FILE__, [ 'Version' => 'Version' ], false );
@@ -35,8 +36,11 @@ define( 'WK_BASENAME', plugin_basename( __FILE__ ) );
 
 // File includes
 require_once WK_DIR_INTERFACE . 'WK_Consts.php';
+require_once WK_DIR_ENUM . 'WK_Assets.php';
+require_once WK_DIR_ENUM . 'WK_Event.php';
 require_once WK_DIR_CORE . 'WK_DB.php';
 require_once WK_DIR_CORE . 'WK_Menu.php';
+require_once WK_DIR_CORE . 'WK_Events.php';
 
 require_once WK_DIR_CORE . 'WK_Init.php';
 
