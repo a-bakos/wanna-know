@@ -40,11 +40,11 @@ require_once WK_DIR_CORE . 'WK_Menu.php';
 
 require_once WK_DIR_CORE . 'WK_Init.php';
 
-readonly final class WK implements WK_Consts {
+readonly final class WK implements \WK\WK_Consts {
 
 	public function __construct() {
 		$this->plugin_setup();
-		new WK_Init();
+		new \WK\WK_Init();
 	}
 
 	/**
@@ -65,7 +65,7 @@ readonly final class WK implements WK_Consts {
 	 * @return void
 	 */
 	public function plugin_activate(): void {
-		( new WK_DB() )?->create_main_table();
+		( new \WK\WK_DB() )?->create_main_table();
 
 		// Register admin rights
 	}
@@ -78,7 +78,7 @@ readonly final class WK implements WK_Consts {
 	public function plugin_deactivate(): void {
 		// Maybe Drop the main database table
 		//if ( get_option( self::SETTING_NAME['delete_main_table'] ) ) {
-		( new WK_DB() )?->drop_table();
+		( new \WK\WK_DB() )?->drop_table();
 
 		// Maybe delete all plugin settings
 
@@ -91,7 +91,7 @@ readonly final class WK implements WK_Consts {
 	 * @return void
 	 */
 	public function wk_check_php(): void {
-		if ( version_compare( PHP_VERSION, WK_Consts::MINIMUM_PHP_VERSION, '<' ) ) {
+		if ( version_compare( PHP_VERSION, \WK\WK_Consts::MINIMUM_PHP_VERSION, '<' ) ) {
 			if ( is_plugin_active( WK_BASENAME ) ) {
 				deactivate_plugins( WK_BASENAME );
 				// add_action( 'admin_notices', [ $this, 'wk_error_activation_notice' ] );
@@ -119,32 +119,32 @@ readonly final class WK implements WK_Consts {
 
 	public function wk_enqueue_admin(): void {
 		wp_enqueue_style(
-			WK_AssetHandler::CSS_Admin->value,
-			plugin_dir_url( __FILE__ ) . WK_AssetHandler::CSS_Admin->get_path(),
+			\WK\WK_AssetHandler::CSS_Admin->value,
+			plugin_dir_url( __FILE__ ) . \WK\WK_AssetHandler::CSS_Admin->get_path(),
 			false,
 			WK_VERSION
 		);
 
 		wp_enqueue_script(
-			WK_AssetHandler::JS_Admin->value,
-			plugin_dir_url( __FILE__ ) . WK_AssetHandler::JS_Admin->get_path(),
-			[ WK_AssetHandler::JQuery->value ]
+			\WK\WK_AssetHandler::JS_Admin->value,
+			plugin_dir_url( __FILE__ ) . \WK\WK_AssetHandler::JS_Admin->get_path(),
+			[ \WK\WK_AssetHandler::JQuery->value ]
 		);
 	}
 
 	public function wk_enqueue_front_end(): void {
 		wp_enqueue_style(
-			WK_AssetHandler::CSS_Front->value,
+			\WK\WK_AssetHandler::CSS_Front->value,
 
-			plugin_dir_url( __FILE__ ) . WK_AssetHandler::CSS_Front->get_path(),
+			plugin_dir_url( __FILE__ ) . \WK\WK_AssetHandler::CSS_Front->get_path(),
 			false,
 			WK_VERSION
 		);
 
 		wp_enqueue_script(
-			WK_AssetHandler::JS_Front->value,
-			plugin_dir_url( __FILE__ ) . WK_AssetHandler::CSS_Front->get_path(),
-			[ WK_AssetHandler::JQuery->value ]
+			\WK\WK_AssetHandler::JS_Front->value,
+			plugin_dir_url( __FILE__ ) . \WK\WK_AssetHandler::CSS_Front->get_path(),
+			[ \WK\WK_AssetHandler::JQuery->value ]
 		);
 	}
 }

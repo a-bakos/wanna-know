@@ -1,5 +1,7 @@
 <?php
 
+namespace WK;
+
 readonly final class WK_Init {
 	public function __construct() {
 		add_action( 'init', [ $this, 'wk_init' ] );

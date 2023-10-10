@@ -1,4 +1,7 @@
 <?php
+
+namespace WK;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
 	die;
@@ -27,7 +30,7 @@ enum WK_AssetHandler: string {
 			WK_AssetHandler::CSS_Front => WK_AssetPath::CSS_Front->value,
 			WK_AssetHandler::JS_Admin  => WK_AssetPath::JS_Admin->value,
 			WK_AssetHandler::JS_Front  => WK_AssetPath::JS_Front->value,
-			WK_AssetHandler::CSS_FA    => WK_AssetPath::FA->value,
+			//WK_AssetHandler::CSS_FA    => WK_AssetPath::FA->value,
 			default                    => '',
 		};
 	}
