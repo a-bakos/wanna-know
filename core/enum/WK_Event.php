@@ -36,4 +36,145 @@ enum WK_Event: int {
 			default               => false,
 		};
 	}
+
+	public function details(): array {
+		return match ( $this ) {
+			self::POST_STATUS_CHANGED     => [
+				'desc'        => 'Changed post status.',
+				'icon'        => '<i class="fas fa-exchange-alt wdi__event wdi__event--status"></i>',
+				'filter_name' => 'Post status changed',
+			],
+			self::POST_TRASHED            => [
+				'desc'        => 'Moved a post to the trash.',
+				'icon'        => '<i class="fas fa-trash wdi__event wdi__event--trashed"></i>',
+				'filter_name' => 'Post moved to trash',
+			],
+			self::POST_UNTRASHED          => [
+				'desc'        => 'Restored a post from the trash.',
+				'icon'        => '<i class="fas fa-recycle wdi__event wdi__event--untrashed"></i>',
+				'filter_name' => 'Post restored from trash',
+			],
+			self::POST_DELETED            => [
+				'desc'        => 'Deleted a post.',
+				'icon'        => '<i class="fas fa-minus-circle wdi__event wdi__event--delete"></i>',
+				'filter_name' => 'Post deleted',
+			],
+			self::CATEGORY_CREATED        => [
+				'desc'        => 'Created a category.',
+				'icon'        => '<i class="fas fa-tag wdi__event wdi__event--category-create"></i>',
+				'filter_name' => 'Category created',
+			],
+			self::CATEGORY_DELETED        => [
+				'desc'        => 'Deleted a category.',
+				'icon'        => '<i class="fas fa-tag wdi__event wdi__event--category-delete"></i>',
+				'filter_name' => 'Category deleted',
+			],
+			self::CATEGORY_EDITED         => [
+				'desc'        => 'Edited a category.',
+				'icon'        => '<i class="fas fa-tag wdi__event wdi__event--category-edit"></i>',
+				'filter_name' => 'Category edited',
+			],
+			self::FILE_UPLOADED           => [
+				'desc'        => 'Uploaded a file to the Media Library.',
+				'icon'        => '<i class="fas fa-file-upload wdi__event wdi__event--upload"></i>',
+				'filter_name' => 'Media file uploaded',
+			],
+			self::FILE_DELETED            => [
+				'desc'        => 'Deleted a file from the Media Library.',
+				'icon'        => '<i class="fas fa-folder-minus wdi__event wdi__event--remove"></i>',
+				'filter_name' => 'Media file deleted',
+			],
+			self::PLUGIN_INSTALLED        => [
+				'desc'        => 'Installed a plugin.',
+				'icon'        => '<i class="fas fa-plug wdi__event wdi__event--plugin-install"></i>',
+				'filter_name' => 'Plugin installed',
+			],
+			self::PLUGIN_ACTIVATED        => [
+				'desc'        => 'Activated a plugin.',
+				'icon'        => '<i class="fas fa-plug wdi__event wdi__event--plugin-activate"></i>',
+				'filter_name' => 'Plugin activated',
+			],
+			self::PLUGIN_DEACTIVATED      => [
+				'desc'        => 'Deactivated a plugin.',
+				'icon'        => '<i class="fas fa-plug wdi__event wdi__event--plugin-deactivate"></i>',
+				'filter_name' => 'Plugin deactivated',
+			],
+			self::PLUGIN_UNINSTALLED      => [
+				'desc'        => 'Removed a plugin.',
+				'icon'        => '<i class="fas fa-plug wdi__event wdi__event--plugin-remove"></i>',
+				'filter_name' => 'Plugin removed',
+			],
+			self::THEME_ACTIVATED         => [
+				'desc'        => 'Activated a theme.',
+				'icon'        => '<i class="fas fa-file-code wdi__event wdi__event--theme-activate"></i>',
+				'filter_name' => 'Theme activation',
+			],
+			self::USER_REGISTERED         => [
+				'desc'        => 'Registered a user.',
+				'icon'        => '<i class="fas fa-user-plus wdi__event wdi__event--user-register"></i>',
+				'filter_name' => 'User registration',
+			],
+			self::USER_DELETED            => [
+				'desc'        => 'Deleted a user.',
+				'icon'        => '<i class="fas fa-user-times wdi__event wdi__event--user-remove"></i>',
+				'filter_name' => 'User deletion',
+			],
+			self::USER_ROLE_CHANGED       => [
+				'desc'        => 'Changed user role.',
+				'icon'        => '<i class="fas fa-user-cog wdi__event wdi__event--user-role-change"></i>',
+				'filter_name' => 'User role change',
+			],
+			self::USER_ROLE_CHANGED_MULTI => [
+				'desc'        => 'Changed multiple user role.',
+				'icon'        => '<i class="fas fa-user-cog wdi__event wdi__event--user-role-change"></i>',
+				'filter_name' => 'User role change (multiple)',
+			],
+			self::USER_PASS_CHANGED       => [
+				'desc'        => 'Changed password for:',
+				'icon'        => '<i class="fas fa-key wdi__event wdi__event--user-pass-change"></i>',
+				'filter_name' => 'User password change',
+			],
+			self::USER_EMAIL_CHANGED      => [
+				'desc'        => 'Changed user email.',
+				'icon'        => '<i class="fas fa-file-code wdi__event wdi__event--user-email-change"></i>',
+				'filter_name' => 'User email change',
+			],
+			self::USER_KICKED_OUT         => [
+				'desc'        => 'Kicked this user out:',
+				'icon'        => '<i class="fas fa-user-times wdi__event wdi__event--user-boot"></i>',
+				'filter_name' => 'Kick user out',
+			],
+			self::USER_LOGIN              => [
+				'desc'        => 'Logged in at:',
+				'icon'        => '<i class="fas fa-user-check wdi__event wdi__event--user-login"></i>',
+				'filter_name' => 'User login',
+			],
+			self::MENU_UPDATED            => [
+				'desc'        => 'Updated menu:',
+				'icon'        => '<i class="fas fa-bars wdi__event wdi__event--menu-update"></i>',
+				'filter_name' => 'Menu update',
+			],
+			self::MENU_CREATED            => [
+				'desc'        => 'Created navigation:',
+				'icon'        => '<i class="fas fa-bars wdi__event wdi__event--menu-create"></i>',
+				'filter_name' => 'Menu created',
+			],
+			self::MENU_DELETED            => [
+				'desc'        => 'Deleted menu:',
+				'icon'        => '<i class="fas fa-bars wdi__event wdi__event--menu-delete"></i>',
+				'filter_name' => 'Menu deleted',
+			],
+			default                       => [
+				'desc'        => 'Error: Missing event details',
+				'icon'        => '',
+				'filter_name' => WK_Consts::ERROR_MISSING_FILTER_NAME,
+			],
+		};
+	}
+}
+
+enum WK_EventInfo: string {
+	case Description = 'desc';
+	case Icon        = 'icon';
+	case FilterName  = 'filter_name';
 }

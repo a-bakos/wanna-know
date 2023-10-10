@@ -41,6 +41,7 @@ require_once WK_DIR_ENUM . 'WK_Event.php';
 require_once WK_DIR_CORE . 'WK_DB.php';
 require_once WK_DIR_CORE . 'WK_Menu.php';
 require_once WK_DIR_CORE . 'WK_Events.php';
+require_once WK_DIR_CORE . 'WK_Cron.php';
 
 require_once WK_DIR_CORE . 'WK_Init.php';
 

@@ -14,4 +14,6 @@ interface WK_Consts {
 	final public const SETTINGS_GROUP      = 'wk-settings-group';
 	final public const WK_CAP              = 'wk_supervisor';
 	final public const ADMIN_CAP           = 'administrator';
+
+	final public const ERROR_MISSING_FILTER_NAME = 'Missing filter name!';
 }
