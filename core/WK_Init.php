@@ -18,3 +18,19 @@ readonly final class WK_Init {
 		//
 	}
 }
+
+/**
+ * Helper debug function
+ *
+ * @param mixed $to_check The data to observe.
+ */
+if ( ! function_exists( 'wk_p' ) ) {
+	function wki_p( $a ) {
+		if ( null === $a ) {
+			echo '<pre style="background: #333; color: #fff;padding: 10px;display: block;"><code>null</code></pre>';
+		} else {
+			echo '<pre style="background: #333; color: #fff;padding: 10px;display: block;"><code>',
+			esc_attr( print_r( $a, 1 ) ), '</code></pre>';
+		}
+	}
+}
