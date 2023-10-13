@@ -51,6 +51,34 @@ readonly final class WK_DB implements WK_Consts {
 		dbDelta( $sql );
 	}
 
+	public static function prepare_log_item(
+		int $user_id,
+		int $event_id,
+		int $subject_id,
+		int $subject_type,
+		string $subject_title = '',
+		string $subject_url = '',
+		string $subject_old_value = '',
+		string $subject_new_value = '',
+		string $description = '',
+		string $user_email = '',
+	): array {
+		$log_data = [];
+
+		$log_data[] = $user_id ?: WK_Consts::UNKNOWN_USER_ID;
+		$log_data[] = $user_email;
+		$log_data[] = $event_id ?: WK_Event::UNKNOWN->value;
+		$log_data[] = $subject_id ?: WK_Consts::UNKNOWN_POST_ID;
+		$log_data[] = $subject_title;
+		$log_data[] = $subject_url;
+		$log_data[] = $subject_old_value;
+		$log_data[] = $subject_new_value;
+		$log_data[] = $subject_type ?: WK_Log::Unknown->value;
+		$log_data[] = $description;
+
+		return $log_data;
+	}
+
 	public function drop_table(): void {
 		if ( self::table_exists( WK_Consts::MAIN_TABLE_NAME ) ) {
 			global $wpdb;
