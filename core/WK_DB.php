@@ -9,10 +9,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 readonly final class WK_DB implements WK_Consts {
 
+	public string $main_table;
+
+	public function __construct() {
+		global $wpdb;
+		$this->main_table = $wpdb->prefix . WK_Consts::MAIN_TABLE_NAME;
+	}
+
 	public function create_main_table(): void {
 		global $wpdb;
-
-		$table_name      = $wpdb->prefix . WK_Consts::MAIN_TABLE_NAME;
 		$charset_collate = $wpdb->get_charset_collate();
 
 		/**
@@ -31,7 +36,7 @@ readonly final class WK_DB implements WK_Consts {
 		 * - description       => Any additional information if needed
 		 * - datetime          => Date/time of the event/action happened
 		 */
-		$sql = "CREATE TABLE IF NOT EXISTS $table_name (
+		$sql = "CREATE TABLE IF NOT EXISTS $this->main_table (
 			id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 			user_id INT UNSIGNED NOT NULL,
 			user_email VARCHAR(500) DEFAULT '',
@@ -79,12 +84,49 @@ readonly final class WK_DB implements WK_Consts {
 		return $log_data;
 	}
 
+	public function insert_log_item( array $log_data ) {
+		if ( ! $log_data ) {
+			return;
+		}
+
+		global $wpdb;
+
+		$values_to_insert = [
+			'user_id'           => $log_data[0],
+			'user_email'        => $log_data[1],
+			'event_id'          => $log_data[2],
+			'subject_id'        => $log_data[3],
+			'subject_title'     => $log_data[4],
+			'subject_url'       => $log_data[5],
+			'subject_old_value' => $log_data[6],
+			'subject_new_value' => $log_data[7],
+			'subject_type'      => $log_data[8],
+			'description'       => $log_data[9],
+		];
+
+		$format_values = [
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+		];
+
+		$insert = $wpdb->insert( $this->main_table, $values_to_insert, $format_values );
+
+		//wk_p( $wpdb->insert_id );
+		//$wpdb->print_error();
+	}
+
 	public function drop_table(): void {
-		if ( self::table_exists( WK_Consts::MAIN_TABLE_NAME ) ) {
+		if ( self::table_exists( $this->main_table ) ) {
 			global $wpdb;
-			$table_name = $wpdb->prefix . WK_Consts::MAIN_TABLE_NAME;
-			$sql        = 'DROP TABLE IF EXISTS ' . $table_name;
-			$wpdb->query( $sql );
+			$wpdb->query( 'DROP TABLE IF EXISTS ' . $this->main_table );
 		}
 	}
 
@@ -98,8 +140,7 @@ readonly final class WK_DB implements WK_Consts {
 	public static function table_exists( string $table_name ): bool {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . $table_name;
-		$query      = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table_name ) );
+		$query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table_name ) );
 
 		if ( ! $wpdb->get_var( $query ) == $table_name ) {
 			return false; // Table doesn't exist.
