@@ -3,3 +3,29 @@
 Status: Heavily work in progress, dev work just started
 
 A WordPress plugin to analyse admin-side actions/events
+
+**Event trackers to implement**
+
+- Post status changed
+- Post moved to trash
+- Post untrashed
+- Post deleted (permanently)
+- Media, file, attachment uploaded
+- Media, file, attachment deleted
+- Category term created
+- Category term edited
+- Category term deleted
+- Navigation Menu created
+- Navigation Menu updated
+- Navigation Menu deleted
+- Plugin activated
+- Plugin deactivated
+- Plugin added
+- Plugin removed
+- Theme activated
+- User registered
+- User password changed
+- User role changed
+- User deleted
+- User logged in
+- IP address
