@@ -124,10 +124,8 @@ readonly final class WK_DB implements WK_Consts {
 	}
 
 	public function drop_table(): void {
-		if ( self::table_exists( $this->main_table ) ) {
-			global $wpdb;
-			$wpdb->query( 'DROP TABLE IF EXISTS ' . $this->main_table );
-		}
+		global $wpdb;
+		$wpdb->query( 'DROP TABLE IF EXISTS ' . $this->main_table );
 	}
 
 	/**
