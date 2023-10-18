@@ -11,6 +11,9 @@ readonly final class WK_Init {
 		new WK_Request_Router();
 		new WK_Menu();
 		new WK_Admin_Dashboard_Feed();
+		new WK_Admin_Dashboard_Stats();
+		new WK_Admin_Dashboard_Users();
+		new WK_Admin_Bar();
 		new WK_Events();
 		new WK_Cron();
 		new WK_Event_Listener_Media();

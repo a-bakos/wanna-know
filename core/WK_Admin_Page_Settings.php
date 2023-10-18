@@ -31,6 +31,17 @@ readonly final class WK_Admin_Page_Settings implements WK_Consts {
 				</tbody>
 			</table>
 
+			<h2>Event Listeners</h2>
+
+			<table class="form-table" role="presentation">
+				<tbody>
+					<tr>
+						<th scope="row">EVENT</th>
+						<td>PLACEHOLDER</td>
+					</tr>
+				</tbody>
+			</table>
+
 			<div class="clear"></div>
 		</div>
 		<?php
