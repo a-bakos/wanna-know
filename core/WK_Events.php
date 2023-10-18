@@ -12,8 +12,8 @@ readonly final class WK_Events {
 	/**
 	 * Get event description by event code or enum variant
 	 */
-	public static function get_event( int|WK_Event $event ): ?array {
-		if ( ! $event ) {
+	public static function get_event( int|WK_Event $event = null ): ?array {
+		if ( null === $event ) {
 			return null;
 		}
 
@@ -24,24 +24,24 @@ readonly final class WK_Events {
 		return $event->details();
 	}
 
-	public static function get_event_icon( int|WK_Event $event ): ?string {
-		if ( ! $event ) {
+	public static function get_event_icon( int|WK_Event $event = null ): ?string {
+		if ( null === $event ) {
 			return null;
 		}
 
 		return self::get_event( $event )[ WK_EventInfo::Icon->value ];
 	}
 
-	public static function get_event_description( int|WK_Event $event ): ?string {
-		if ( ! $event ) {
+	public static function get_event_description( int|WK_Event $event = null ): ?string {
+		if ( null === $event ) {
 			return null;
 		}
 
 		return self::get_event( $event )[ WK_EventInfo::Description->value ];
 	}
 
-	public static function get_event_filter_name( int|WK_Event $event ): ?string {
-		if ( ! $event ) {
+	public static function get_event_filter_name( int|WK_Event $event = null ): ?string {
+		if ( null === $event ) {
 			return null;
 		}
 
