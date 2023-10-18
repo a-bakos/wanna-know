@@ -4,6 +4,10 @@ Status: Heavily work in progress, dev work just started
 
 A WordPress plugin to analyse admin-side actions/events
 
+Minimum required php version: 8.2
+
+Tested with WP 6.3.2
+
 **Event trackers to implement**
 
 - Post status changed
