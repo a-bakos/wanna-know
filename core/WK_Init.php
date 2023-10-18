@@ -9,6 +9,7 @@ readonly final class WK_Init {
 
 	public function wk_init(): void {
 		new WK_Menu();
+		new WK_Admin_Dashboard_Feed();
 		new WK_Events();
 		new WK_Cron();
 		add_action( 'admin_init', [ $this, 'wk_register_settings' ] ); // For Users

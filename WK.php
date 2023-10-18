@@ -46,6 +46,7 @@ require_once WK_DIR_CORE . 'WK_Menu.php';
 
 require_once WK_DIR_CORE . 'WK_Admin_Page_Settings.php';
 require_once WK_DIR_CORE . 'WK_Admin_Page_Log.php';
+require_once WK_DIR_CORE . 'WK_Admin_Dashboard_Feed.php';
 
 require_once WK_DIR_CORE . 'WK_Events.php';
 require_once WK_DIR_CORE . 'WK_Cron.php';
