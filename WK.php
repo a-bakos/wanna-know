@@ -37,6 +37,7 @@ define( 'WK_BASENAME', plugin_basename( __FILE__ ) );
 // File includes
 require_once WK_DIR_INTERFACE . 'WK_Consts.php';
 
+require_once WK_DIR_ENUM . 'WK_DB_Column.php';
 require_once WK_DIR_ENUM . 'WK_Assets.php';
 require_once WK_DIR_ENUM . 'WK_Event.php';
 require_once WK_DIR_ENUM . 'WK_Log.php';
@@ -150,7 +151,6 @@ readonly final class WK implements \WK\WK_Consts {
 	public function wk_enqueue_front_end(): void {
 		wp_enqueue_style(
 			\WK\WK_AssetHandler::CSS_Front->value,
-
 			plugin_dir_url( __FILE__ ) . \WK\WK_AssetHandler::CSS_Front->get_path(),
 			false,
 			WK_VERSION

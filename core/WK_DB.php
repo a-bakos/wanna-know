@@ -36,19 +36,32 @@ readonly final class WK_DB implements WK_Consts {
 		 * - description       => Any additional information if needed
 		 * - datetime          => Date/time of the event/action happened
 		 */
+		$id                = WK_DB_Column::ID->value;
+		$user_id           = WK_DB_Column::User_ID->value;
+		$user_email        = WK_DB_Column::User_Email->value;
+		$event_id          = WK_DB_Column::Event_ID->value;
+		$subject_id        = WK_DB_Column::Subject_ID->value;
+		$subject_title     = WK_DB_Column::Subject_Title->value;
+		$subject_url       = WK_DB_Column::Subject_URL->value;
+		$subject_old_value = WK_DB_Column::Subject_Old_Value->value;
+		$subject_new_value = WK_DB_Column::Subject_New_Value->value;
+		$subject_type      = WK_DB_Column::Subject_Type->value;
+		$description       = WK_DB_Column::Description->value;
+		$datetime          = WK_DB_Column::Datetime->value;
+
 		$sql = "CREATE TABLE IF NOT EXISTS $this->main_table (
-			id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-			user_id INT UNSIGNED NOT NULL,
-			user_email VARCHAR(500) DEFAULT '',
-			event_id SMALLINT UNSIGNED NOT NULL,
-			subject_id INT UNSIGNED NOT NULL,
-			subject_title VARCHAR(500) DEFAULT '',
-			subject_url VARCHAR(500) DEFAULT '',
-			subject_old_value TEXT DEFAULT '',
-			subject_new_value TEXT DEFAULT '',
-			subject_type TINYINT UNSIGNED NOT NULL,
-			description TEXT DEFAULT '',
-			datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+			$id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+			$user_id INT UNSIGNED NOT NULL,
+			$user_email VARCHAR(500) DEFAULT '',
+			$event_id SMALLINT UNSIGNED NOT NULL,
+			$subject_id INT UNSIGNED NOT NULL,
+			$subject_title VARCHAR(500) DEFAULT '',
+			$subject_url VARCHAR(500) DEFAULT '',
+			$subject_old_value TEXT DEFAULT '',
+			$subject_new_value TEXT DEFAULT '',
+			$subject_type TINYINT UNSIGNED NOT NULL,
+			$description TEXT DEFAULT '',
+			$datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 			PRIMARY KEY (id)
 		) $charset_collate;";
 
@@ -92,16 +105,16 @@ readonly final class WK_DB implements WK_Consts {
 		global $wpdb;
 
 		$values_to_insert = [
-			'user_id'           => $log_data[0],
-			'user_email'        => $log_data[1],
-			'event_id'          => $log_data[2],
-			'subject_id'        => $log_data[3],
-			'subject_title'     => $log_data[4],
-			'subject_url'       => $log_data[5],
-			'subject_old_value' => $log_data[6],
-			'subject_new_value' => $log_data[7],
-			'subject_type'      => $log_data[8],
-			'description'       => $log_data[9],
+			WK_DB_Column::User_ID->value           => $log_data[0],
+			WK_DB_Column::User_Email->value        => $log_data[1],
+			WK_DB_Column::Event_ID->value          => $log_data[2],
+			WK_DB_Column::Subject_ID->value        => $log_data[3],
+			WK_DB_Column::Subject_Title->value     => $log_data[4],
+			WK_DB_Column::Subject_URL->value       => $log_data[5],
+			WK_DB_Column::Subject_Old_Value->value => $log_data[6],
+			WK_DB_Column::Subject_New_Value->value => $log_data[7],
+			WK_DB_Column::Subject_Type->value      => $log_data[8],
+			WK_DB_Column::Description->value       => $log_data[9],
 		];
 
 		$format_values = [
