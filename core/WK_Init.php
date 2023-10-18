@@ -13,6 +13,9 @@ readonly final class WK_Init {
 		new WK_Admin_Dashboard_Feed();
 		new WK_Events();
 		new WK_Cron();
+		new WK_Event_Listener_Media();
+		new WK_Event_Listener_Post();
+		new WK_Event_Listener_System();
 		add_action( 'admin_init', [ $this, 'wk_register_settings' ] );
 	}
 
