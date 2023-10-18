@@ -3,7 +3,7 @@
 namespace WK;
 
 readonly final class WK_Admin_Page_Settings implements WK_Consts {
-	public function render() {
+	public function render(): void {
 		?>
 		<div class="wrap">
 			<h1>WannaKnow Settings</h1>

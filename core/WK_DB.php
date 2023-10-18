@@ -13,7 +13,7 @@ readonly final class WK_DB implements WK_Consts {
 
 	public function __construct() {
 		global $wpdb;
-		$this->main_table = $wpdb->prefix . WK_Consts::MAIN_TABLE_NAME;
+		$this->main_table = $wpdb->prefix . self::MAIN_TABLE_NAME;
 	}
 
 	public function create_main_table(): void {
@@ -67,10 +67,10 @@ readonly final class WK_DB implements WK_Consts {
 	): array {
 		$log_data = [];
 
-		$log_data[] = $user_id ?: WK_Consts::UNKNOWN_USER_ID;
+		$log_data[] = $user_id ?: self::UNKNOWN_USER_ID;
 		$log_data[] = $user_email;
 		$log_data[] = $event_id ?: WK_Event::UNKNOWN->value;
-		$log_data[] = $subject_id ?: WK_Consts::UNKNOWN_POST_ID;
+		$log_data[] = $subject_id ?: self::UNKNOWN_POST_ID;
 		$log_data[] = $subject_title;
 		$log_data[] = $subject_url;
 		$log_data[] = $subject_old_value;
