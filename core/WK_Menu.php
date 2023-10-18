@@ -29,7 +29,7 @@ readonly final class WK_Menu implements WK_Consts {
 			WK_Consts::APP_NAME . ' | Settings',
 			'Settings',
 			WK_Consts::ADMIN_CAP,// TODO change this to WK_CAP later
-			'dashicons-thumbs-down',
+			'wk_settings',
 			[ ( new WK_Admin_Page_Settings ), 'render' ]
 		);
 	}
