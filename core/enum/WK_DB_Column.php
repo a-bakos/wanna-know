@@ -19,4 +19,21 @@ enum WK_DB_Column: string {
 	case Subject_Type      = 'subject_type';
 	case Description       = 'description';
 	case Datetime          = 'datetime';
+
+	public function description(): string {
+		return match ( $this ) {
+			self::ID                => 'The auto-allocated row index',
+			self::User_ID           => 'ID of the user performed who the action',
+			self::User_Email        => 'Email of the user performed who the action',
+			self::Event_ID          => 'Event/action ID',
+			self::Subject_ID        => 'ID of the subject (eg. post) the user interacted with',
+			self::Subject_Title     => 'Post Title where applicable',
+			self::Subject_URL       => 'Post URL where applicable',
+			self::Subject_Old_Value => 'Subject value changed from',
+			self::Subject_New_Value => 'Subject value changed to',
+			self::Subject_Type      => 'The type of the post, e.g. Post, Media',
+			self::Description       => 'Any additional information if needed',
+			self::Datetime          => 'Date/time of the event/action happened',
+		};
+	}
 }

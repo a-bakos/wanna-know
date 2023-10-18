@@ -20,22 +20,6 @@ readonly final class WK_DB implements WK_Consts {
 		global $wpdb;
 		$charset_collate = $wpdb->get_charset_collate();
 
-		/**
-		 * Table columns definitions:
-		 *
-		 * - id                => the auto-allocated row index
-		 * - user_id           => ID of the user performed who the action
-		 * - user_email        => Email of the user performed who the action
-		 * - event_id          => Event/action ID
-		 * - subject_id        => ID of the subject (eg. post) the user interacted with
-		 * - subject_title     => Post Title where applicable
-		 * - subject_url       => Post URL where applicable
-		 * - subject_old_value => Subject value changed from
-		 * - subject_new_value => Subject value changed to
-		 * - subject_type      => The type of the post, e.g. Post, Media
-		 * - description       => Any additional information if needed
-		 * - datetime          => Date/time of the event/action happened
-		 */
 		$id                = WK_DB_Column::ID->value;
 		$user_id           = WK_DB_Column::User_ID->value;
 		$user_email        = WK_DB_Column::User_Email->value;
