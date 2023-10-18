@@ -2,7 +2,10 @@
 
 namespace WK;
 
-class WK_Admin_Page_Settings {
-
-	public function __construct() {}
+readonly final class WK_Admin_Page_Settings {
+	public function render() {
+		?>
+		<h1>HELLOHELLO</h1>
+		<?php
+	}
 }

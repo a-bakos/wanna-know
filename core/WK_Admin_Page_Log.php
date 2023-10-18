@@ -2,7 +2,11 @@
 
 namespace WK;
 
-class WK_Admin_Page_Log {
+readonly final class WK_Admin_Page_Log {
 
-	public function __construct() {}
+	public function render() {
+		?>
+		<h1>LOG LOG HELLOHELLO</h1>
+		<?php
+	}
 }

@@ -16,18 +16,21 @@ readonly final class WK_Menu implements WK_Consts {
 
 	public function wk_admin_menu(): void {
 		add_menu_page(
-			WK_Consts::APP_NAME . ' | Settings',
+			WK_Consts::APP_NAME . ' | Log',
 			WK_Consts::APP_NAME,
 			WK_Consts::ADMIN_CAP, // TODO change this to WK_CAP later
-			'wk_settings',
-			[ $this, 'wk_settings_page' ],
+			'wk_log',
+			[ ( new WK_Admin_Page_Log ), 'render' ],
 			'dashicons-thumbs-down'
 		);
-	}
 
-	public function wk_settings_page(): void {
-		?>
-		<h1>HELLO</h1>
-		<?php
+		add_submenu_page(
+			'wk_log',
+			WK_Consts::APP_NAME . ' | Settings',
+			'Settings',
+			WK_Consts::ADMIN_CAP,// TODO change this to WK_CAP later
+			'dashicons-thumbs-down',
+			[ ( new WK_Admin_Page_Settings ), 'render' ]
+		);
 	}
 }
