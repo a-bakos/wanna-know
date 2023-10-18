@@ -60,6 +60,7 @@ require_once WK_DIR_CORE . 'WK_Cron.php';
 require_once WK_DIR_CORE . 'WK_Event_Listener_Media.php';
 require_once WK_DIR_CORE . 'WK_Event_Listener_Post.php';
 require_once WK_DIR_CORE . 'WK_Event_Listener_System.php';
+require_once WK_DIR_CORE . 'WK_Event_Listener_User.php';
 
 require_once WK_DIR_CORE . 'WK_Init.php';
 

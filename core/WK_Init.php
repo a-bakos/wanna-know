@@ -19,6 +19,7 @@ readonly final class WK_Init {
 		new WK_Event_Listener_Media();
 		new WK_Event_Listener_Post();
 		new WK_Event_Listener_System();
+		new WK_Event_Listener_User();
 		add_action( 'admin_init', [ $this, 'wk_register_settings' ] );
 	}
 
