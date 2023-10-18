@@ -2,6 +2,10 @@
 
 namespace WK;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 enum WK_Event: int {
 	case POST_STATUS_CHANGED     = 100; // User changed the status of a post.
 	case POST_TRASHED            = 105; // User moved a post to the trash.

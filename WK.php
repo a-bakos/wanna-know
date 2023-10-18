@@ -40,8 +40,10 @@ require_once WK_DIR_INTERFACE . 'WK_Consts.php';
 require_once WK_DIR_ENUM . 'WK_Assets.php';
 require_once WK_DIR_ENUM . 'WK_Event.php';
 require_once WK_DIR_ENUM . 'WK_Log.php';
+require_once WK_DIR_ENUM . 'WK_Post_Type.php';
 
 require_once WK_DIR_CORE . 'WK_DB.php';
+require_once WK_DIR_CORE . 'WK_Request_Router.php';
 require_once WK_DIR_CORE . 'WK_Menu.php';
 
 require_once WK_DIR_CORE . 'WK_Admin_Page_Settings.php';

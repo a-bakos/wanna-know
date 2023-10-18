@@ -2,6 +2,10 @@
 
 namespace WK;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 enum WK_AssetHandler: string {
 	case CSS_Admin = 'wk_style_admin';
 	case CSS_Front = 'wk_style_front_end';

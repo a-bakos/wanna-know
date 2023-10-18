@@ -2,6 +2,10 @@
 
 namespace WK;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 enum WK_Mime: string {
 	case App   = 'application';
 	case Text  = 'text';

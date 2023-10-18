@@ -2,6 +2,10 @@
 
 namespace WK;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 enum WK_Log: int {
 	case Post     = 1;
 	case Media    = 2;

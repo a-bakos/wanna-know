@@ -8,11 +8,12 @@ readonly final class WK_Init {
 	}
 
 	public function wk_init(): void {
+		new WK_Request_Router();
 		new WK_Menu();
 		new WK_Admin_Dashboard_Feed();
 		new WK_Events();
 		new WK_Cron();
-		add_action( 'admin_init', [ $this, 'wk_register_settings' ] ); // For Users
+		add_action( 'admin_init', [ $this, 'wk_register_settings' ] );
 	}
 
 	public function wk_register_settings(): void {
@@ -22,11 +23,9 @@ readonly final class WK_Init {
 
 /**
  * Helper debug function
- *
- * @param mixed $to_check The data to observe.
  */
 if ( ! function_exists( 'wk_p' ) ) {
-	function wki_p( $a ) {
+	function wk_p( mixed $a ) {
 		if ( null === $a ) {
 			echo '<pre style="background: #333; color: #fff;padding: 10px;display: block;"><code>null</code></pre>';
 		} else {
