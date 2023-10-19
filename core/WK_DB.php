@@ -81,6 +81,7 @@ readonly final class WK_DB implements WK_Consts {
 		return $log_data;
 	}
 
+	// todo - insert_log_item to return bool on successful insertion
 	public function insert_log_item( array $log_data ) {
 		if ( ! $log_data ) {
 			return;

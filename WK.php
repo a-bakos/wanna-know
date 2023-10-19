@@ -41,7 +41,7 @@ require_once WK_DIR_ENUM . 'WK_DB_Column.php';
 require_once WK_DIR_ENUM . 'WK_Assets.php';
 require_once WK_DIR_ENUM . 'WK_Event.php';
 require_once WK_DIR_ENUM . 'WK_Log.php';
-require_once WK_DIR_ENUM . 'WK_Post_Type.php';
+require_once WK_DIR_ENUM . 'WK_Subject_Type.php';
 
 require_once WK_DIR_CORE . 'WK_DB.php';
 require_once WK_DIR_CORE . 'WK_Request_Router.php';

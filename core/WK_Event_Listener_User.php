@@ -22,21 +22,14 @@ readonly final class WK_Event_Listener_User {
 			return false;
 		}
 
-		wk_p( $user_data );
-		/*
-		 [data] => stdClass Object
-        (
-            [ID] => 1
-            [user_login] => xxxx
-            [user_email] => xxxx
-            [user_registered] => 2023-06-11 07:05:19
-            [display_name] => xxxx
-        )
-		[roles] => Array
-        (
-            [0] => administrator
-        )
-		 */
-		die;
+		( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
+			user_id:      $user_data->data->ID,
+			event_id:     WK_Event::USER_LOGIN->value,
+			subject_id:   $user_data->data->ID,
+			subject_type: WK_Subject_Type::User->value,
+			user_email:   $user_data->data->user_email,
+		) );
+
+		return true; // todo - insert_log_item to return bool on successful insertion
 	}
 }

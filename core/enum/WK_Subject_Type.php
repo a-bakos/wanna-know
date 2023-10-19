@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-enum WK_Post_Type: int {
+enum WK_Subject_Type: int {
 	case Post     = 1; // Normals posts. This is the default for everything if not specified otherwise.
 	case File     = 2; // Files, attachments, or media uploads
 	case Revision = 3; // Post revisions

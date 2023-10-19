@@ -31,7 +31,7 @@ enum WK_DB_Column: string {
 			self::Subject_URL       => 'Post URL where applicable',
 			self::Subject_Old_Value => 'Subject value changed from',
 			self::Subject_New_Value => 'Subject value changed to',
-			self::Subject_Type      => 'The type of the post, e.g. Post, Media',
+			self::Subject_Type      => 'The type of the subject, e.g. Post, Media',
 			self::Description       => 'Any additional information if needed',
 			self::Datetime          => 'Date/time of the event/action happened',
 		};
