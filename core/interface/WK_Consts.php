@@ -17,6 +17,6 @@ interface WK_Consts {
 
 	final public const ERROR_MISSING_FILTER_NAME = 'Missing filter name!';
 
-	final public const UNKNOWN_USER_ID = 0;
+	final public const UNKNOWN_ID      = 0;
 	final public const UNKNOWN_POST_ID = 0;
 }

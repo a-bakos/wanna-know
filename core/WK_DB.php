@@ -67,7 +67,7 @@ readonly final class WK_DB implements WK_Consts {
 	): array {
 		$log_data = [];
 
-		$log_data[] = $user_id ?: self::UNKNOWN_USER_ID;
+		$log_data[] = $user_id ?: self::UNKNOWN_ID;
 		$log_data[] = $user_email;
 		$log_data[] = $event_id ?: WK_Event::UNKNOWN->value;
 		$log_data[] = $subject_id ?: self::UNKNOWN_POST_ID;
