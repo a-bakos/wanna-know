@@ -82,9 +82,9 @@ readonly final class WK_DB implements WK_Consts {
 	}
 
 	// todo - insert_log_item to return bool on successful insertion
-	public function insert_log_item( array $log_data ) {
+	public function insert_log_item( array $log_data ): ?bool {
 		if ( ! $log_data ) {
-			return;
+			return null;
 		}
 
 		global $wpdb;
@@ -117,8 +117,16 @@ readonly final class WK_DB implements WK_Consts {
 
 		$insert = $wpdb->insert( $this->main_table, $values_to_insert, $format_values );
 
-		//wk_p( $wpdb->insert_id );
-		//$wpdb->print_error();
+		// Debug:
+		// wk_p( $wpdb->insert_id );
+		// $wpdb->print_error();
+
+		// $insert is false or number of rows inserted
+		if ( $insert ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public function drop_table(): void {
