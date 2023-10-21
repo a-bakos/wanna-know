@@ -28,8 +28,10 @@ Tested with WP 6.3.2
 - Plugin removed
 - Theme activated
 - User registered
-- User password changed
 - User role changed
-- User deleted
 - User logged in
 - IP address
+
+**Event trackers implemented**
+- User deleted
+- User password changed
