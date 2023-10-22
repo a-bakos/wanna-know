@@ -117,10 +117,12 @@ readonly final class WK implements \WK\WK_Consts {
 		// todo
 
 		// Remove all user rights
-		$wk_admins = get_users( [ 'capability' => \WK\WK_Consts::WK_CAP ] );
-		if ( ! empty( $wk_admins ) ) {
-			foreach ( $wk_admins as $admin ) {
-				$admin->remove_cap( \WK\WK_Consts::WK_CAP );
+		$wk_supervisors = get_users( [ 'capability' => \WK\WK_Consts::WK_CAP ] );
+		\WK\wk_p( $wk_supervisors );
+
+		if ( ! empty( $wk_supervisors ) ) {
+			foreach ( $wk_supervisors as $super ) {
+				$super->remove_cap( \WK\WK_Consts::WK_CAP );
 			}
 		}
 	}
