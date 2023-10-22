@@ -31,8 +31,6 @@ readonly final class WK_Init extends WK_Access_Control {
 		new WK_Event_Listener_System();
 		new WK_Event_Listener_User();
 		add_action( 'admin_init', [ $this, 'wk_register_settings' ] );
-
-		wk_p( current_user_can( WK_Consts::WK_CAP ) );
 	}
 
 	public function wk_register_settings(): void {

@@ -19,10 +19,10 @@ abstract readonly class WK_Access_Control {
 		}
 	}
 
-	public function user_has_access( CAP_TYPE|int $cap_or_id = CAP_TYPE::Super,
+	public function user_has_access( WK_Cap_Type|int $cap_or_id = WK_Cap_Type::Super,
 		WK_Element $element = WK_Element::General ): bool {
 		return match ( is_int( $cap_or_id ) ) {
-			true  => $this->check_access_by_id( $cap_or_id, $element ), //user_can( $cap_or_id, CAP_TYPE::Super->value ),
+			true  => $this->check_access_by_id( $cap_or_id, $element ),
 			false => current_user_can( $cap_or_id->value ),
 		};
 	}
