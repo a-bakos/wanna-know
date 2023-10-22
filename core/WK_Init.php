@@ -3,6 +3,7 @@
 namespace WK;
 
 readonly final class WK_Init extends WK_Access_Control {
+
 	public function __construct() {
 		add_action( 'init', [ $this, 'wk_init' ] );
 	}

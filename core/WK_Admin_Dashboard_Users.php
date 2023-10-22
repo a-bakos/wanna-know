@@ -7,9 +7,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-readonly final class WK_Admin_Dashboard_Users extends WK_Access_Control implements WK_Consts {
+readonly final class WK_Admin_Dashboard_Users implements WK_Consts {
 	public function __construct() {
-
 		add_action( 'wp_dashboard_setup', function () {
 			add_meta_box(
 				'wk-dashboard-users-metabox',

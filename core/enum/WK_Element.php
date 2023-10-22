@@ -7,7 +7,7 @@ enum WK_Element: string {
 	const WK_OPTION_STATS = 'wk_global_option_enable_widget_stats';
 	const WK_OPTION_USERS = 'wk_global_option_enable_widget_users';
 
-	case General         = 'general';
+	case General         = 'general'; // todo - rename or see if we need this variant
 	case Dashboard_Feed  = self::WK_OPTION_FEED;
 	case Dashboard_Stats = self::WK_OPTION_STATS;
 	case Dashboard_Users = self::WK_OPTION_USERS;
@@ -29,9 +29,11 @@ enum WK_Element: string {
 		$option_names_for_roles = [];
 
 		$all_roles = wp_roles();
-		foreach ( WK_Element::cases() as $element ) {
-			foreach ( $all_roles->role_names as $role_key => $role_name ) {
-				$option_names_for_roles[] = self::construct_option_name( $element->value, $role_key );
+		if ( ! empty( $all_roles ) ) {
+			foreach ( self::cases() as $element ) {
+				foreach ( $all_roles->role_names as $role_key => $role_name ) {
+					$option_names_for_roles[] = self::construct_option_name( $element->value, $role_key );
+				}
 			}
 		}
 
