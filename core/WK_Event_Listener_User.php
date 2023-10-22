@@ -48,7 +48,7 @@ readonly final class WK_Event_Listener_User implements WK_Consts {
 		}
 
 		if ( ! empty( $post_array[ $key_pass1 ] ) && ! empty( $post_array[ $key_pass2 ] ) ) {
-			if ( trim( $post_array[ $key_pass1 ] ) == trim( $post_array[ $key_pass2 ] ) ) {
+			if ( trim( $post_array[ $key_pass1 ] ) === trim( $post_array[ $key_pass2 ] ) ) {
 				return ( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
 					user_id:      isset( $post_array[ $key_uid ] ) ?? self::UNKNOWN_ID,
 					event_id:     WK_Event::USER_PASS_CHANGED->value,
