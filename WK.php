@@ -42,6 +42,8 @@ require_once WK_DIR_INTERFACE . 'WK_Consts.php';
 
 require_once WK_DIR_ENUM . 'WK_DB_Column.php';
 require_once WK_DIR_ENUM . 'WK_Assets.php';
+require_once WK_DIR_ENUM . 'WK_Cap_Type.php';
+require_once WK_DIR_ENUM . 'WK_Element.php';
 require_once WK_DIR_ENUM . 'WK_Event.php';
 require_once WK_DIR_ENUM . 'WK_Log.php';
 require_once WK_DIR_ENUM . 'WK_Subject_Type.php';
@@ -101,6 +103,11 @@ readonly final class WK implements \WK\WK_Consts {
 				$admin->add_cap( \WK\WK_Consts::WK_CAP );
 			}
 		}
+
+		// Register all element visibility options
+		foreach ( \WK\WK_Element::get_option_names_for_roles() as $wk_option ) {
+			add_option( $wk_option, false, '', false );
+		}
 	}
 
 	/**
@@ -114,11 +121,15 @@ readonly final class WK implements \WK\WK_Consts {
 		( new \WK\WK_DB() )?->drop_table();
 
 		// Maybe delete all plugin settings
-		// todo
+		// todo:
+
+		// Delete all element visibility options
+		foreach ( \WK\WK_Element::get_option_names_for_roles() as $wk_option ) {
+			delete_option( $wk_option );
+		}
 
 		// Remove all user rights
 		$wk_supervisors = get_users( [ 'capability' => \WK\WK_Consts::WK_CAP ] );
-		\WK\wk_p( $wk_supervisors );
 
 		if ( ! empty( $wk_supervisors ) ) {
 			foreach ( $wk_supervisors as $super ) {

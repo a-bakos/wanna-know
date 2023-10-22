@@ -2,17 +2,27 @@
 
 namespace WK;
 
-readonly final class WK_Init {
+readonly final class WK_Init extends WK_Access_Control {
 	public function __construct() {
 		add_action( 'init', [ $this, 'wk_init' ] );
 	}
 
 	public function wk_init(): void {
 		new WK_Request_Router();
-		new WK_Menu();
-		new WK_Admin_Dashboard_Feed();
-		new WK_Admin_Dashboard_Stats();
-		new WK_Admin_Dashboard_Users();
+
+		if ( $this->user_has_access() ) {
+			new WK_Menu();
+		}
+
+		if ( $this->user_has_access( get_current_user_id(), WK_Element::Dashboard_Feed ) ) {
+			new WK_Admin_Dashboard_Feed();
+		}
+		if ( $this->user_has_access( get_current_user_id(), WK_Element::Dashboard_Stats ) ) {
+			new WK_Admin_Dashboard_Stats();
+		}
+		if ( $this->user_has_access( get_current_user_id(), WK_Element::Dashboard_Users ) ) {
+			new WK_Admin_Dashboard_Users();
+		}
 		new WK_Admin_Bar();
 		new WK_Events();
 		new WK_Cron();
