@@ -24,6 +24,7 @@ if (
 }
 define( 'WK_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WK_DIR_CORE', plugin_dir_path( __FILE__ ) . 'core/' );
+define( 'WK_DIR_ABSTRACT', plugin_dir_path( __FILE__ ) . 'core/abstract/' );
 define( 'WK_DIR_INTERFACE', plugin_dir_path( __FILE__ ) . 'core/interface/' );
 define( 'WK_DIR_ENUM', plugin_dir_path( __FILE__ ) . 'core/enum/' );
 
@@ -35,6 +36,8 @@ define( 'WK_VERSION', $plugin_version );
 define( 'WK_BASENAME', plugin_basename( __FILE__ ) );
 
 // File includes
+require_once WK_DIR_ABSTRACT . 'WK_Access_Control.php';
+
 require_once WK_DIR_INTERFACE . 'WK_Consts.php';
 
 require_once WK_DIR_ENUM . 'WK_DB_Column.php';
@@ -92,6 +95,12 @@ readonly final class WK implements \WK\WK_Consts {
 		( new \WK\WK_DB() )?->create_main_table();
 
 		// Register admin rights
+		$administrators = get_users( [ 'role' => \WK\WK_Consts::ADMIN_CAP ] );
+		if ( ! empty( $administrators ) ) {
+			foreach ( $administrators as $admin ) {
+				$admin->add_cap( \WK\WK_Consts::WK_CAP );
+			}
+		}
 	}
 
 	/**
@@ -105,8 +114,15 @@ readonly final class WK implements \WK\WK_Consts {
 		( new \WK\WK_DB() )?->drop_table();
 
 		// Maybe delete all plugin settings
+		// todo
 
-		// Remove user rights
+		// Remove all user rights
+		$wk_admins = get_users( [ 'capability' => \WK\WK_Consts::WK_CAP ] );
+		if ( ! empty( $wk_admins ) ) {
+			foreach ( $wk_admins as $admin ) {
+				$admin->remove_cap( \WK\WK_Consts::WK_CAP );
+			}
+		}
 	}
 
 	/**

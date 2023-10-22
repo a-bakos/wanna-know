@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 readonly final class WK_Event_Listener_User implements WK_Consts {
 	public function __construct() {
 		// TODO this will be wrapped in user setting/option
+
 		add_action( 'wp_login', [ $this, 'user_logged_in' ] );
 
 		add_action( 'personal_options_update', [ $this, 'password_changed' ] );
