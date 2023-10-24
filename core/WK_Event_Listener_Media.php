@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-readonly final class WK_Event_Listener_Media implements WK_Consts {
+readonly final class WK_Event_Listener_Media extends WK_Current_User implements WK_Consts {
 	public function __construct() {
 		add_action( 'add_attachment', [ $this, 'media_uploaded' ] );
 		add_action( 'delete_attachment', [ $this, 'media_deleted' ] );
@@ -17,12 +17,12 @@ readonly final class WK_Event_Listener_Media implements WK_Consts {
 		// Filter $_POST array for security
 		$post_array = filter_input_array( INPUT_POST );
 
-		$user_data = []; // todo placeholder
+		$user_data = self::get_userdata();
 
 		$media_id = 0;
 
 		return ( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
-			user_id:           $user_data->data->ID ?? self::UNKNOWN_ID,
+			user_id:           $user_data['ID'] ?? self::UNKNOWN_ID,
 			event_id:          WK_Event::FILE_UPLOADED->value,
 			subject_id:        $media_id,
 			subject_type:      WK_Subject_Type::File->value,

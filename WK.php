@@ -37,6 +37,7 @@ define( 'WK_BASENAME', plugin_basename( __FILE__ ) );
 
 // File includes
 require_once WK_DIR_ABSTRACT . 'WK_Access_Control.php';
+require_once WK_DIR_ABSTRACT . 'WK_Current_User.php';
 
 require_once WK_DIR_INTERFACE . 'WK_Consts.php';
 

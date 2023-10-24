@@ -8,7 +8,8 @@ abstract readonly class WK_Current_User {
 	public final const KEY_LASTNAME    = 'last_name';
 	public final const VALUE_LOCALHOST = 'localhost';
 
-	public static function get_userdata( ?int $user_id ): ?array {
+	// If no user_id supplied, assume current user
+	public static function get_userdata( int $user_id = null ): ?array {
 		if ( ! $user_id ) {
 			$user_id = get_current_user_id();
 		}
@@ -30,12 +31,13 @@ abstract readonly class WK_Current_User {
 
 			$user      = get_userdata( $user_id );
 			$user_meta = get_user_meta( $user_id );
-
-			$roles = $user->roles ?? [];
+			$roles     = $user->roles ?? [];
 
 			return [
-				'login'       => $user->data->user_login,
-				'email'       => $user->data->user_email,
+				// TODO - create an enum of these variants! - WIP
+				'ID'          => $user->ID,
+				'login'       => isset( $user->data->user_login ) ?? '',
+				'email'       => isset( $user->data->user_email ) ?? '',
 				'full_name'   => self::get_username( $user_id ),
 				'first_name'  => isset( $user_meta[ self::KEY_FIRSTNAME ][0] ) ?? '',
 				'last_name'   => isset( $user_meta[ self::KEY_LASTNAME ][0] ) ?? '',
@@ -48,11 +50,7 @@ abstract readonly class WK_Current_User {
 	}
 
 	public static function get_profile_link( \WP_User|int $user ): string {
-		if ( $user instanceof \WP_User ) {
-			$user_id = $user->ID;
-		} else {
-			$user_id = $user;
-		}
+		$user_id = $user instanceof \WP_User ? $user->ID : $user;
 
 		return get_edit_user_link( $user_id );
 	}
@@ -66,7 +64,7 @@ abstract readonly class WK_Current_User {
 	 */
 	public static function get_username( int $user_id ): string {
 		if ( WK_Consts::UNKNOWN_ID == $user_id ) {
-			$user_name = 'System'; //self::USER_SYSTEM;
+			$user_name = WK_Consts::USER_SYSTEM; // TODO review this: ID 0 originally means unknown ID
 		} else {
 			$user = self::get_userdata( $user_id );
 

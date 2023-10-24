@@ -15,6 +15,8 @@ interface WK_Consts {
 	final public const WK_CAP              = 'wk_supervisor';
 	final public const ADMIN_CAP           = 'administrator';
 
+	final public const USER_SYSTEM = 'System';
+
 	final public const ERROR_MISSING_FILTER_NAME = 'Missing filter name!';
 
 	final public const UNKNOWN_ID      = 0;
