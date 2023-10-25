@@ -43,6 +43,7 @@ require_once WK_DIR_INTERFACE . 'WK_Consts.php';
 
 require_once WK_DIR_ENUM . 'WK_DB_Column.php';
 require_once WK_DIR_ENUM . 'WK_Assets.php';
+require_once WK_DIR_ENUM . 'WK_Action_Type.php';
 require_once WK_DIR_ENUM . 'WK_Cap_Type.php';
 require_once WK_DIR_ENUM . 'WK_Element.php';
 require_once WK_DIR_ENUM . 'WK_Event.php';

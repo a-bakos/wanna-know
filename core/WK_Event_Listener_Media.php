@@ -17,12 +17,7 @@ readonly final class WK_Event_Listener_Media extends WK_Current_User implements 
 		// Filter $_POST array for security
 		$post_array = filter_input_array( INPUT_POST );
 
-		// TODO into enum
-		// 'action' variants:
-		// 'upload-theme'
-		// 'upload-plugin'
-		// 'upload-attachment'
-		if ( isset( $post_array['action'] ) && $post_array['action'] === 'upload-attachment' ) {
+		if ( isset( $post_array['action'] ) && $post_array['action'] === \WK_Action_Type::UPLOAD_ATTACHMENT ) {
 			$user_data = self::get_userdata();
 
 			//$file = get_attached_file( $attachment_id );
