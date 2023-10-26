@@ -72,14 +72,33 @@ readonly final class WK_Event_Listener_Media extends WK_Current_User implements 
 				subject_old_value: '',
 				subject_new_value: '',
 				description:       '',
-				user_email:        $user_data->data->user_email,
+				user_email:        $user_data['email'],
 			) );
 		}
 
 		return false;
 	}
 
-	public function media_deleted(): bool {
+	public function media_deleted( int $attachment_id = null ): bool {
+		$user_data = self::get_userdata();
+//		wk_p( $_POST );
+//		die;
+
+		$file = get_attached_file( $attachment_id );
+		$aux  = basename( $file );
+
+		return ( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
+			user_id:           $user_data['ID'] ?? self::UNKNOWN_ID,
+			event_id:          WK_Event::FILE_DELETED->value,
+			subject_id:        $attachment_id ?? self::UNKNOWN_ID,
+			subject_type:      WK_Subject_Type::File->value,
+			subject_title:     '',
+			subject_url:       '',
+			subject_old_value: '',
+			subject_new_value: '',
+			description:       '',
+			user_email:        $user_data['email'],
+		) );
 
 		// todo
 		// on delete request, grab ID, filename
