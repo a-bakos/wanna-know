@@ -14,8 +14,8 @@ Tested with WP 6.3.2
 - Post moved to trash
 - Post untrashed
 - Post deleted (permanently)
-- Media, file, attachment uploaded
-- Media, file, attachment deleted
+- (wip) Media, file, attachment uploaded
+- (wip) Media, file, attachment deleted
 - Category term created
 - Category term edited
 - Category term deleted
