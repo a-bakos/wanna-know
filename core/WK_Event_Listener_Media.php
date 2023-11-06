@@ -7,7 +7,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-readonly final class WK_Event_Listener_Media extends WK_Current_User implements WK_Consts {
+readonly final class WK_Event_Listener_Media implements WK_Consts {
+	use WK_Current_User;
+
 	public function __construct() {
 		add_action( 'add_attachment', [ $this, 'media_uploaded' ] );
 		add_action( 'delete_attachment', [ $this, 'media_deleted' ] );

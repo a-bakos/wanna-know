@@ -2,7 +2,7 @@
 
 namespace WK;
 
-abstract readonly class WK_Current_User {
+trait WK_Current_User {
 
 	public final const KEY_FIRSTNAME   = 'first_name';
 	public final const KEY_LASTNAME    = 'last_name';
@@ -33,17 +33,16 @@ abstract readonly class WK_Current_User {
 			$user_meta = get_user_meta( $user_id );
 			$roles     = $user->roles ?? [];
 
-			return [
-				// TODO - create an enum of these variants! - WIP
-				'ID'          => $user->ID,
-				'login'       => isset( $user->data->user_login ) ?? '',
-				'email'       => isset( $user->data->user_email ) ?? '',
-				'full_name'   => self::get_username( $user_id ),
-				'first_name'  => isset( $user_meta[ self::KEY_FIRSTNAME ][0] ) ?? '',
-				'last_name'   => isset( $user_meta[ self::KEY_LASTNAME ][0] ) ?? '',
-				'role'        => $roles,
-				'profile_url' => self::get_profile_link( $user_id ),
-			];
+			return WK_User_Data::compile(
+				user_id:     $user->ID,
+				login:       isset( $user->data->user_login ) ?? '',
+				email:       isset( $user->data->user_email ) ?? '',
+				full_name:   self::get_username( $user_id ),
+				first_name:  isset( $user_meta[ self::KEY_FIRSTNAME ][0] ) ?? '',
+				last_name:   isset( $user_meta[ self::KEY_LASTNAME ][0] ) ?? '',
+				roles:       $roles,
+				profile_url: self::get_profile_link( $user_id ),
+			);
 		} else {
 			return null;
 		}
