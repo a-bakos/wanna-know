@@ -34,14 +34,15 @@ trait WK_Current_User {
 			$roles     = $user->roles ?? [];
 
 			return WK_User_Data::compile(
-				user_id:     $user->ID,
-				login:       isset( $user->data->user_login ) ?? '',
-				email:       isset( $user->data->user_email ) ?? '',
-				full_name:   self::get_username( $user_id ),
-				first_name:  isset( $user_meta[ self::KEY_FIRSTNAME ][0] ) ?? '',
-				last_name:   isset( $user_meta[ self::KEY_LASTNAME ][0] ) ?? '',
-				roles:       $roles,
-				profile_url: self::get_profile_link( $user_id ),
+				$user_id,
+				$user->data->user_login,
+				$user->data->user_email,
+				// TODO construction of full name
+				$user_meta[ self::KEY_FIRSTNAME ][0] . ' ' . $user_meta[ self::KEY_LASTNAME ][0],
+				$user_meta[ self::KEY_FIRSTNAME ][0],
+				$user_meta[ self::KEY_LASTNAME ][0],
+				$roles,
+				self::get_profile_link( $user_id ),
 			);
 		} else {
 			return null;
@@ -65,6 +66,7 @@ trait WK_Current_User {
 		if ( WK_Consts::UNKNOWN_ID == $user_id ) {
 			$user_name = WK_Consts::USER_SYSTEM; // TODO review this: ID 0 originally means unknown ID
 		} else {
+			// TODO - this is not right, infinite loop danger
 			$user = self::get_userdata( $user_id );
 
 			// See if first or last name is available

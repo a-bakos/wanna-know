@@ -1,5 +1,7 @@
 <?php
 
+namespace WK;
+
 enum WK_Action_Type: string {
 	case UPLOAD_THEME      = 'upload-theme';
 	case UPLOAD_PLUGIN     = 'upload-plugin';

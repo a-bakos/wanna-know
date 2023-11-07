@@ -44,6 +44,7 @@ require_once WK_DIR_ABSTRACT . 'WK_Access_Control.php';
 require_once WK_DIR_INTERFACE . 'WK_Consts.php';
 
 require_once WK_DIR_ENUM . 'WK_DB_Column.php';
+require_once WK_DIR_ENUM . 'WK_User_Data.php';
 require_once WK_DIR_ENUM . 'WK_Assets.php';
 require_once WK_DIR_ENUM . 'WK_Action_Type.php';
 require_once WK_DIR_ENUM . 'WK_Cap_Type.php';
