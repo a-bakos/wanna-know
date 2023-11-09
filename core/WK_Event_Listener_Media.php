@@ -26,10 +26,8 @@ readonly final class WK_Event_Listener_Media implements WK_Consts {
 		) {
 			$user_data = self::get_userdata();
 
-			// TODO figure out how to do this.
-			// $_POST and $_REQUEST do not contain these details
-			// This may need to happen at a later stage
-			// Maybe create an array with these items and add to description
+			// TODO - Capture attachment metadata
+			// GH Issue: https://github.com/a-bakos/wanna-know/issues/5
 			/*
 			"alt":"",
 			"description":"",
