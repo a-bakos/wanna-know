@@ -43,6 +43,9 @@ readonly final class WK_Event_Listener_Media implements WK_Consts {
 			"orientation":"landscape",
 			*/
 
+			// Crazy idea: get the/a smallest res version, base64encode it and store it
+			// This way it could be recalled after deletion
+
 			return ( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
 				user_id:           $user_data[ WK_User_Data::ID->value ] ?? self::UNKNOWN_ID,
 				event_id:          WK_Event::FILE_UPLOADED->value,
