@@ -72,7 +72,7 @@ readonly final class WK_Event_Listener_Media implements WK_Consts {
 		$aux  = basename( $file );
 
 		return ( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
-			user_id:           $user_data['ID'] ?? self::UNKNOWN_ID,
+			user_id:           $user_data[ WK_User_Data::ID->value ] ?? self::UNKNOWN_ID,
 			event_id:          WK_Event::FILE_DELETED->value,
 			subject_id:        $attachment_id ?? self::UNKNOWN_ID,
 			subject_type:      WK_Subject_Type::File->value,
@@ -81,7 +81,7 @@ readonly final class WK_Event_Listener_Media implements WK_Consts {
 			subject_old_value: '',
 			subject_new_value: '',
 			description:       '',
-			user_email:        $user_data['email'],
+			user_email:        $user_data[ WK_User_Data::Email->value ],
 		) );
 
 		// todo
