@@ -45,6 +45,10 @@ readonly final class WK_Event_Listener_Media implements WK_Consts {
 
 			// Crazy idea: get the/a smallest res version, base64encode it and store it
 			// This way it could be recalled after deletion
+			// String byte size:
+			// https://www.javainuse.com/bytesize
+			// Encoder to test things:
+			// https://elmah.io/tools/base64-image-encoder/
 
 			return ( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
 				user_id:           $user_data[ WK_User_Data::ID->value ] ?? self::UNKNOWN_ID,
