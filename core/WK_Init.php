@@ -8,8 +8,6 @@ readonly final class WK_Init extends WK_Access_Control {
 		add_action( 'init', [ $this, 'wk_init' ] );
 	}
 
-	use WK_Current_User;
-
 	public function wk_init(): void {
 		new WK_Request_Router();
 
@@ -33,6 +31,8 @@ readonly final class WK_Init extends WK_Access_Control {
 		new WK_Event_Listener_Post();
 		new WK_Event_Listener_System();
 		new WK_Event_Listener_User();
+		new WK_Event_Listener_Category();
+
 		add_action( 'admin_init', [ $this, 'wk_register_settings' ] );
 	}
 
