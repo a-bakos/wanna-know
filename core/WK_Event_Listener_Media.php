@@ -64,31 +64,23 @@ readonly final class WK_Event_Listener_Media implements WK_Consts {
 	}
 
 	public function media_deleted( int $attachment_id = null ): bool {
-		$user_data = self::get_userdata();
-//		wk_p( $_POST );
-//		die;
+		$user_data  = self::get_userdata();
+		$media_item = get_post( $attachment_id );
 
-		$file = get_attached_file( $attachment_id );
-		$aux  = basename( $file );
-
-		return ( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
-			user_id:           $user_data[ WK_User_Data::ID->value ] ?? self::UNKNOWN_ID,
-			event_id:          WK_Event::FILE_DELETED->value,
-			subject_id:        $attachment_id ?? self::UNKNOWN_ID,
-			subject_type:      WK_Subject_Type::File->value,
-			subject_title:     '',
-			subject_url:       '',
-			subject_old_value: '',
-			subject_new_value: '',
-			description:       '',
-			user_email:        $user_data[ WK_User_Data::Email->value ],
-		) );
-
-		// todo
+		// Todo:
 		// on delete request, grab ID, filename
-		// after delete, go and try to find the ID on a media upload event
+		// go and try to find the ID on a media upload event
 		// and connect the deleted log item to that event
 
-		return false;
+		return ( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
+			user_id:       $user_data[ WK_User_Data::ID->value ] ?? self::UNKNOWN_ID,
+			event_id:      WK_Event::FILE_DELETED->value,
+			subject_id:    $attachment_id ?? self::UNKNOWN_ID,
+			subject_type:  WK_Subject_Type::File->value,
+			subject_title: $media_item->post_title ?? '',
+			subject_url:   $media_item->guid ?? '',
+			description:   $media_item->post_name ?? '',
+			user_email:    $user_data[ WK_User_Data::Email->value ],
+		) );
 	}
 }
