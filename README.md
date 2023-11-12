@@ -14,12 +14,12 @@ Tested with WP 6.3.2
 - Post moved to trash
 - Post untrashed
 - Post deleted (permanently)
-- Category term created
-- Category term edited
-- Category term deleted
-- Navigation Menu created
-- Navigation Menu updated
-- Navigation Menu deleted
+- (wip) Category term created
+- (wip) Category term edited
+- (wip) Category term deleted
+- (wip) Navigation Menu created
+- (wip) Navigation Menu updated
+- (wip) Navigation Menu deleted
 - Plugin activated
 - Plugin deactivated
 - Plugin added
