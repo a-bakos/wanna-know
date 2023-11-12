@@ -26,6 +26,7 @@ define( 'WK_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WK_DIR_CORE', plugin_dir_path( __FILE__ ) . 'core/' );
 define( 'WK_DIR_ABSTRACT', plugin_dir_path( __FILE__ ) . 'core/abstract/' );
 define( 'WK_DIR_INTERFACE', plugin_dir_path( __FILE__ ) . 'core/interface/' );
+define( 'WK_DIR_TRAIT', plugin_dir_path( __FILE__ ) . 'core/trait/' );
 define( 'WK_DIR_ENUM', plugin_dir_path( __FILE__ ) . 'core/enum/' );
 
 // Version definition
@@ -36,13 +37,16 @@ define( 'WK_VERSION', $plugin_version );
 define( 'WK_BASENAME', plugin_basename( __FILE__ ) );
 
 // File includes
+require_once WK_DIR_TRAIT . 'WK_Current_User.php';
+
 require_once WK_DIR_ABSTRACT . 'WK_Access_Control.php';
-require_once WK_DIR_ABSTRACT . 'WK_Current_User.php';
 
 require_once WK_DIR_INTERFACE . 'WK_Consts.php';
 
 require_once WK_DIR_ENUM . 'WK_DB_Column.php';
+require_once WK_DIR_ENUM . 'WK_User_Data.php';
 require_once WK_DIR_ENUM . 'WK_Assets.php';
+require_once WK_DIR_ENUM . 'WK_Action_Type.php';
 require_once WK_DIR_ENUM . 'WK_Cap_Type.php';
 require_once WK_DIR_ENUM . 'WK_Element.php';
 require_once WK_DIR_ENUM . 'WK_Event.php';

@@ -177,6 +177,7 @@ enum WK_Event: int {
 	}
 }
 
+// TODO move this to separate file
 enum WK_EventInfo: string {
 	case Description = 'desc';
 	case Icon        = 'icon';

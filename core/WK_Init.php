@@ -8,6 +8,8 @@ readonly final class WK_Init extends WK_Access_Control {
 		add_action( 'init', [ $this, 'wk_init' ] );
 	}
 
+	use WK_Current_User;
+
 	public function wk_init(): void {
 		new WK_Request_Router();
 
