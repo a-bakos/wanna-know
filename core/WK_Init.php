@@ -32,6 +32,7 @@ readonly final class WK_Init extends WK_Access_Control {
 		new WK_Event_Listener_System();
 		new WK_Event_Listener_User();
 		new WK_Event_Listener_Category();
+		new WK_Event_Listener_Menu();
 
 		add_action( 'admin_init', [ $this, 'wk_register_settings' ] );
 	}
