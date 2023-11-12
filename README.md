@@ -14,8 +14,6 @@ Tested with WP 6.3.2
 - Post moved to trash
 - Post untrashed
 - Post deleted (permanently)
-- (wip) Media, file, attachment uploaded
-- (wip) Media, file, attachment deleted
 - Category term created
 - Category term edited
 - Category term deleted
@@ -33,5 +31,8 @@ Tested with WP 6.3.2
 - IP address
 
 **Event trackers implemented**
+
 - User deleted
 - User password changed
+- Media, file, attachment uploaded
+- Media, file, attachment deleted
