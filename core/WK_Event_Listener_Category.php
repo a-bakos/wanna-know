@@ -52,10 +52,10 @@ readonly final class WK_Event_Listener_Category implements WK_Consts {
 			return false;
 		}
 
-		$key_action   = 'action';
-		$action_value = 'editedtag';
+		$key_action   = 'action'; // TODO: may add this to consts
+		$action_value = 'editedtag'; // TODO: Create enum for WP action values
 
-		$updated_category = isset( $_POST[ $key_action ] ) && $_POST[ $key_action ] === $action_value ? $_POST : null; // validate $post
+		$updated_category = isset( $_POST[ $key_action ] ) && $_POST[ $key_action ] === $action_value ? $_POST : null; // TODO: validate $post
 		if ( ! $updated_category ) {
 			return false;
 		}

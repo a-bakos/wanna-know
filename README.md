@@ -14,8 +14,6 @@ Tested with WP 6.3.2
 - Post moved to trash
 - Post untrashed
 - Post deleted (permanently)
-- Category term created
-- Category term edited
 - Category term deleted
 - Navigation Menu created
 - Navigation Menu updated
@@ -36,3 +34,5 @@ Tested with WP 6.3.2
 - User password changed
 - Media, file, attachment uploaded
 - Media, file, attachment deleted
+- Category term created
+- Category term edited
