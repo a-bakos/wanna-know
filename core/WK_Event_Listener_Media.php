@@ -10,7 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 readonly final class WK_Event_Listener_Media implements WK_Consts {
 	use WK_Current_User;
 
+	private ?array $user_data;
+
 	public function __construct() {
+		$this->user_data = self::get_userdata();
 		add_action( 'add_attachment', [ $this, 'media_uploaded' ] );
 		add_action( 'delete_attachment', [ $this, 'media_deleted' ] );
 	}
@@ -24,8 +27,6 @@ readonly final class WK_Event_Listener_Media implements WK_Consts {
 			isset( $post_array[ $key_action ] ) &&
 			$post_array[ $key_action ] === WK_Action_Type::UPLOAD_ATTACHMENT->value
 		) {
-			$user_data = self::get_userdata();
-
 			// TODO - Capture attachment metadata
 			// GH Issue: https://github.com/a-bakos/wanna-know/issues/5
 			/*
@@ -51,7 +52,7 @@ readonly final class WK_Event_Listener_Media implements WK_Consts {
 			// https://elmah.io/tools/base64-image-encoder/
 
 			return ( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
-				user_id:           $user_data[ WK_User_Data::ID->value ] ?? self::UNKNOWN_ID,
+				user_id:           $this->user_data[ WK_User_Data::ID->value ] ?? self::UNKNOWN_ID,
 				event_id:          WK_Event::FILE_UPLOADED->value,
 				subject_id:        $attachment_id ?? self::UNKNOWN_ID,
 				subject_type:      WK_Subject_Type::File->value,
@@ -60,7 +61,7 @@ readonly final class WK_Event_Listener_Media implements WK_Consts {
 				subject_old_value: '',
 				subject_new_value: '',
 				description:       '',
-				user_email:        $user_data[ WK_User_Data::Email->value ],
+				user_email:        $this->user_data[ WK_User_Data::Email->value ],
 			) );
 		}
 
