@@ -50,6 +50,7 @@ require_once WK_DIR_ENUM . 'WK_Action_Type.php';
 require_once WK_DIR_ENUM . 'WK_Cap_Type.php';
 require_once WK_DIR_ENUM . 'WK_Element.php';
 require_once WK_DIR_ENUM . 'WK_Event.php';
+require_once WK_DIR_ENUM . 'WK_Event_Detail_Category.php';
 require_once WK_DIR_ENUM . 'WK_Log.php';
 require_once WK_DIR_ENUM . 'WK_Subject_Type.php';
 

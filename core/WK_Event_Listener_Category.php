@@ -34,15 +34,46 @@ readonly final class WK_Event_Listener_Category implements WK_Consts {
 			user_id:       $this->user_data[ WK_User_Data::ID->value ] ?? self::UNKNOWN_ID,
 			event_id:      WK_Event::CATEGORY_CREATED->value,
 			subject_id:    $category->term_id ?? self::UNKNOWN_ID,
-			subject_type:  WK_Subject_Type::File->value,
+			subject_type:  WK_Subject_Type::Category->value,
 			subject_title: $category->name ?? self::EMPTY_STRING,
 			subject_url:   $category->slug,
-			description:   $category->taxonomy,
+			description:   json_encode( [ WK_Event_Detail_Category::Taxonomy->value => $category->taxonomy ] ),
 			user_email:    $this->user_data[ WK_User_Data::Email->value ],
 		) );
 	}
 
-	public function category_edited() {}
+	public function category_edited( ?int $category_id = null ): bool {
+		if ( ! $category_id ) {
+			return false;
+		}
+
+		$category_to_change = get_term( $category_id );
+		if ( ! $category_to_change ) {
+			return false;
+		}
+
+		$key_action   = 'action';
+		$action_value = 'editedtag';
+
+		$updated_category = isset( $_POST[ $key_action ] ) && $_POST[ $key_action ] === $action_value ? $_POST : null; // validate $post
+		if ( ! $updated_category ) {
+			return false;
+		}
+		$old_cat_values[ WK_Event_Detail_Category::Name->value ] = $category_to_change->{WK_Event_Detail_Category::Name->value};
+		$old_cat_values[ WK_Event_Detail_Category::Slug->value ] = $category_to_change->{WK_Event_Detail_Category::Slug->value};
+
+		return ( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
+			user_id:           $this->user_data[ WK_User_Data::ID->value ] ?? self::UNKNOWN_ID,
+			event_id:          WK_Event::CATEGORY_EDITED->value,
+			subject_id:        $category_to_change->term_id ?? self::UNKNOWN_ID,
+			subject_type:      WK_Subject_Type::Category->value,
+			subject_title:     $updated_category[ WK_Event_Detail_Category::Name->value ] ?? self::EMPTY_STRING,
+			subject_url:       $updated_category[ WK_Event_Detail_Category::Slug->value ],
+			subject_old_value: json_encode( $old_cat_values ),
+			description:       json_encode( [ WK_Event_Detail_Category::Taxonomy->value => $category_to_change->taxonomy ] ),
+			user_email:        $this->user_data[ WK_User_Data::Email->value ],
+		) );
+	}
 
 	public function term_deleted() {}
 
