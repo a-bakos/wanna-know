@@ -14,9 +14,9 @@ Tested with WP 6.3.2
 - Post moved to trash
 - Post untrashed
 - Post deleted (permanently)
-- Navigation Menu created
-- Navigation Menu updated
-- Navigation Menu deleted
+- (wip) Navigation Menu created
+- (wip) Navigation Menu updated
+- (wip) Navigation Menu deleted
 - Plugin activated
 - Plugin deactivated
 - Plugin added
@@ -33,6 +33,10 @@ Tested with WP 6.3.2
 - User password changed
 - Media, file, attachment uploaded
 - Media, file, attachment deleted
+  <<<<<<< HEAD
 - Category term created
 - Category term edited
 - Category term deleted
+  =======
+
+> > > > > > > 67b89b5759a4510c4f957421deb9926aec842ae3
