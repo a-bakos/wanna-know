@@ -21,4 +21,6 @@ interface WK_Consts {
 
 	final public const UNKNOWN_ID      = 0;
 	final public const UNKNOWN_POST_ID = 0;
+
+	final public const EMPTY_STRING = '';
 }
