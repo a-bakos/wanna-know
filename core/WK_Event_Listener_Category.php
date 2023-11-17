@@ -75,6 +75,42 @@ readonly final class WK_Event_Listener_Category implements WK_Consts {
 		) );
 	}
 
-	public function term_deleted() {}
+	public function term_deleted( ?int $category_id = null ): bool {
+		if ( ! $category_id ) {
+			return false;
+		}
+
+		$category = get_term( $category_id );
+		if ( ! $category ) {
+			return false;
+		}
+
+		return ( new WK_DB() )?->insert_log_item( WK_DB::prepare_log_item(
+			user_id:       $this->user_data[ WK_User_Data::ID->value ] ?? self::UNKNOWN_ID,
+			event_id:      WK_Event::CATEGORY_DELETED->value,
+			subject_id:    $category_id,
+			subject_type:  WK_Subject_Type::Category->value,
+			subject_title: $category->{WK_Event_Detail_Category::Name->value} ?? self::EMPTY_STRING,
+			subject_url:   $category->{WK_Event_Detail_Category::Slug->value},
+			description:   json_encode( [ WK_Event_Detail_Category::Taxonomy->value => $category->taxonomy ] ),
+			user_email:    $this->user_data[ WK_User_Data::Email->value ],
+		) );
+	}
 
 }
+/*
+// Prototype:
+
+( new WK_DB() )?->insert_log_item( WK_Log_Item $log_item );
+( new WK_DB() )?->insert_log_item( new WK_Log_Item( 101, WK_Event::CATEGORY_DELETED, 200, WK_Subject_Type::Category ) );
+final readonly class WK_Log_Item {
+	public function __construct(
+		private int $user_id,
+		private WK_Event $event_id,
+		private int $subject_id,
+		private WK_Subject_Type $subject_type,
+	) {
+
+	}
+}
+*/
